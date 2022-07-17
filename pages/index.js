@@ -84,6 +84,22 @@ export default function Home() {
         color: "#FFFFFF"
        
       }} onClick={connectWalletHandler}>{connButtonText}</button>
+      <p style={{
+        position: "absolute",
+        width: "571px",
+        height: "26px",
+        left: "435px",
+        top: "294px",
+        
+        fontFamily: 'Roboto',
+        fontStyle: "normal",
+        fontWeight: "400",
+        fontSize: "48px",
+        lineHeight: "56px",
+        
+        color: "#000000"
+      }}>{displayMsg} </p>
+
       </div>
     )
   } else {
