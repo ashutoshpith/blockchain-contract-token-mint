@@ -1,0 +1,8 @@
+(await box.balance()).toString()
+await box.burnToken(42);
+(await box.balance()).toString()
+await box.mintToken(42);
+ const box = await Box.attach('0xb912A1569DFd1070B53CDc3933292f5797D79240');
+ const Box = await ethers.getContractFactory('AdaptiveCode');
+(await ethers.provider.getBalance(accounts[0])).toString()
+accounts = await ethers.provider.listAccounts()

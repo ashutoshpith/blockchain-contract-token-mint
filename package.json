@@ -6,15 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "mocha"
   },
   "dependencies": {
+    "@3rdweb/hooks": "^1.9.2",
+    "@openzeppelin/contracts": "^4.7.0",
+    "@walletconnect/web3-provider": "^1.7.8",
+    "ganache": "^7.3.2",
+    "mocha": "^10.0.0",
     "next": "12.2.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "solc": "^0.8.15",
+    "truffle": "^5.5.21",
+    "web3": "^1.7.4"
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.1.0",
+    "chai": "^4.3.6",
     "eslint": "8.19.0",
-    "eslint-config-next": "12.2.2"
+    "eslint-config-next": "12.2.2",
+    "ethers": "^5.6.9",
+    "hardhat": "^2.10.1"
   }
 }
