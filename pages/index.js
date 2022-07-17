@@ -5,20 +5,22 @@ import { useState } from "react";
 
 
 export default function Home() {
-  const {address, chainId, connectWallet} = useWeb3()
+  const {address, chainId, connectWallet, balance: walletBalance} = useWeb3()
   const [provider, setProvider] = useState(null);
 	const [signer, setSigner] = useState(null);
 	const [contract, setContract] = useState(null);
   const [balance, setBalance] = useState(null)
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [connButtonText, setConnButtonText] = useState('Connect Wallet');
+  const [displayMsg, setDisplayMsg] = useState('Please connect your wallet')
 
   const connectWalletHandler = async () => {
 		if (window.ethereum && window.ethereum.isMetaMask) {
       await connectWallet('injected')
       if(address){
-		accountChangedHandler(address);
-	  setConnButtonText('Wallet Connected');
+        accountChangedHandler(address);
+        setConnButtonText('Wallet Connected');
+        setDisplayMsg("")
       }
 		} else {
 			console.log('Need to install MetaMask');
@@ -62,43 +64,103 @@ export default function Home() {
     }
   }
 
-  const burnToken = async (event) => {
-    event.preventDefault();
-    const tokenValue = Number(event.target.setToken.value)
-    if(tokenValue){
-    await contract.burnToken(tokenValue);
-    }
-  }
+
+  if(displayMsg){
+    return (
+      <div>
+    <button style={{
+        position: "absolute",
+        width: "602px",
+        height: "100px",
+        left: "856px",
+        top: "68px",
+        background: "#FF11E7",
+        fontFamily: 'Roboto',
+        fontStyle: "normal",
+        fontWeight: "400",
+        fontSize: "48px",
+        lineHeight: "56px",
+
+        color: "#FFFFFF"
+       
+      }} onClick={connectWalletHandler}>{connButtonText}</button>
+      </div>
+    )
+  } else {
      return (
       <div>
-        <h4> {"Get/Set Contract interaction"} </h4>
-			<button onClick={connectWalletHandler}>{connButtonText}</button>
-      
-			<div>
-				<h3>Address: {defaultAccount}</h3>
-			</div>
-        <button onClick={getBalance}>Balance</button>
-        {balance}
+            <button style={{
+        position: "absolute",
+        width: "602px",
+        height: "100px",
+        left: "856px",
+        top: "68px",
+        background: "#FF11E7",
+        fontFamily: 'Roboto',
+        fontStyle: "normal",
+        fontWeight: "300",
+        fontSize: "20px",
+        lineHeight: "56px",
+
+        color: "#FFFFFF"
+       
+      }}>{defaultAccount}</button>
+
+  <div style={{
+            paddingTop: "200px",
+            
+        }}>
+	
+  <button onClick={getBalance}>Total Supply</button>
+        <h2>{balance}</h2>
         <br></br>
         <hr></hr>
         <br></br>
         <form onSubmit={mintToken}>
-				<input id="setToken" type="text"/>
-				<button type={"submit"}> Mint Token </button>
-			</form>
-        <br></br>
-        <hr></hr>
-        <br></br>
-        <form onSubmit={burnToken}>
-				<input id="setToken" type="text"/>
-				<button type={"submit"}> Burn Token </button>
+				<button type={"submit"} style={{
+          position: "absolute",
+          width: "735px",
+          height: "139px",
+          left: "145px",
+          top: "400px",
+          
+          background: "#FF11E7"
+        }}> Mint Token </button>
+				<input id="setToken" type="text" style={{
+          boxSizing: "border-box",
+          position: "absolute",
+          width: "198px",
+          height: "188px",
+          left: "1025px",
+          top: "376px",
+          
+          background: "#FFFFFF",
+          border: "1px solid #000000",
+        }}/>
+
 			</form>
 
+     <p style={{
+      position: "absolute",
+      width: "761px",
+      height: "84px",
+      left: "290px",
+      top: "557px",
       
-        <br></br>
-        <hr></hr>
-        <br></br>
-      </div>
-    )
-  } 
+      fontFamily: 'Roboto',
+      fontStyle: "normal",
+      fontWeight: "400",
+      fontSize: "42px",
+      lineHeight: "84px",
+      
+      color: "#000000"
+     }}>Token Balance in Wallet {walletBalance.value.toString()}</p>
+      
+     
 
+
+        </div>
+      
+      </div>
+     )
+    }}
